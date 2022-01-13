@@ -17,7 +17,7 @@ function getAllDirectors(arr) {
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
 function howManyMovies(arr) {
   let spielbergDramas = arr.filter(function (movieObject) {
-    movieObject.director === 'Steven Spielberg' && movieObject.genre.includes('Drama')
+    return movieObject.director === 'Steven Spielberg' && movieObject.genre.includes('Drama')
   });
   return spielbergDramas;
 }
@@ -25,28 +25,36 @@ function howManyMovies(arr) {
 // Iteration 3: All scores average - Get the average of all scores with 2 decimals
 function scoresAverage(arr) {
   if (arr.Length === 0){
-    return 0
-  }
+    return 0;
+  };
 
   let scoreArray = arr.map(function (movieObject){
     return movieObject.score;
-  })
-  return scoreArray =  (scoreArray.reduce((a,b) => {
+  });
+  
+  scoreArray =  (scoreArray.reduce((a,b) => {
     return a+b
-  }))/ scoreArray.length
+  }))/ scoreArray.length;
+  return Math.round(scoreArray * 100) / 100
 }
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
 function dramaMoviesScore(arr) {
-  let dramaArray = arr.map(function (movieObject){
-    if (movieObject.genre.includes('Drama')){
-    return movieObject.score;
-    }
+  let finalSum
+  let scoreList;
+  let movieDramas = arr.filter(function (movieObject1) {
+    return movieObject1.genre.includes('Drama');
   });
-
-  return dramaArray =  (dramaArray.reduce((a,b) => {
+  
+  scoreList = movieDramas.map(movieObject2 => {
+    return movieObject2.score;
+  })
+  
+  finalSum = (scoreList.reduce((a,b) => {
     return a+b
-  }))/ dramaArray.length
+  }))/ scoreList.length;
+
+  return Math.round(finalSum * 100) / 100;
 }
 
 
